@@ -1,0 +1,39 @@
+### GET cats
+GET http://localhost:3000/api/cats
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJzYWJyaW5hLWxvZ2luQHRlc3QuZnIiLCJpYXQiOjE3ODAzMzUzNzksImV4cCI6MTc4MDM0MjU3OX0.Xpg9j6rL2UTgrC0ZFhKQyRulhdAcew43Ln84TX7QJOA
+
+
+### GET cat by id
+GET http://localhost:3000/api/cats/1
+
+###Creer un chat
+POST http://localhost:3000/api/cats
+Content-Type: application/json
+
+{
+  "data": {
+    "name": "Kiwi",
+    "age": 6,
+    "userId": 1
+  }
+}
+
+
+
+### PuT chat 
+PUT http://localhost:3000/api/cats/1
+Content-Type: application/json
+
+{
+  "data": {
+    "name": "Kiki",
+    "age": 6,
+    "userId": 1
+  }
+}
+
+
+
+### Delete chat 
+DELETE http://localhost:3000/api/cats/1
+### 
