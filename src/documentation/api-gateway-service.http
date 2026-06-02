@@ -1,0 +1,49 @@
+### Gateway health
+GET http://localhost:3000/health
+
+### QCMs via gateway
+GET http://localhost:3000/api/qcms
+
+### Via le gateway — Créer un QCM
+POST http://localhost:3000/api/qcms
+Content-Type: application/json
+
+{
+  "data": {
+    "name": "Michael Jackson",
+    "questions": [
+      {
+        "description": "Quel surnom était donné à Michael Jackson ?",
+        "propositions": [
+          { "description": "The King of Pop", "isValid": true },
+          { "description": "The King of Rock", "isValid": false },
+          { "description": "The King of Jazz", "isValid": false }
+        ]
+      },
+      {
+        "description": "Quelles chansons sont de Michael Jackson ?",
+        "propositions": [
+          { "description": "Billie Jean", "isValid": true },
+          { "description": "Thriller", "isValid": true },
+          { "description": "Shape of You", "isValid": false }
+        ]
+      },
+      {
+        "description": "Dans quel groupe Michael Jackson a-t-il commencé sa carrière ?",
+        "propositions": [
+          { "description": "The Jackson 5", "isValid": true },
+          { "description": "ABBA", "isValid": false },
+          { "description": "The Beatles", "isValid": false }
+        ]
+      },
+      {
+        "description": "Quels albums ont été publiés par Michael Jackson ?",
+        "propositions": [
+          { "description": "Thriller", "isValid": true },
+          { "description": "Bad", "isValid": true },
+          { "description": "Nevermind", "isValid": false }
+        ]
+      }
+    ]
+  }
+}

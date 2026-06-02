@@ -1,36 +1,24 @@
 import express from "express";
 import cors from "cors";
 import "dotenv/config";
-
-import { qcmRouter } from "./router/qcms";
-import { PrismaClient } from "@prisma/client";
-import { propositionRouter } from "./router/propositions";
-import { questionRouter } from "./router/questions";
-import { userRouter } from "./router/users";
-
-export const prisma = new PrismaClient();
+import { createProxyMiddleware } from "http-proxy-middleware";
 
 const app = express();
 
 app.use(cors());
-app.use(express.json());
 
-const apiRouter = express.Router();
-
-app.use("", apiRouter);
-
-apiRouter.get("/health", (req, res) => {
-  res.json({ status: "ok", service: "qcm-service" });
+const qcmProxy = createProxyMiddleware({
+  target: "http://localhost:3001/qcms",
+  changeOrigin: true,
+});
+app.get("/health", (req, res) => {
+  res.json({ status: "ok", service: "api-gateway" });
 });
 
-apiRouter.use("/qcms", qcmRouter);
-apiRouter.use("/results", propositionRouter);
-apiRouter.use("/questions", questionRouter);
-apiRouter.use("/auth", userRouter);
+app.use("/api/qcms", qcmProxy);
 
-
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-  console.log(`QCM API est en cours d'exécution sur le port ${PORT}`);
+  console.log(`API Gateway lancé sur le port ${PORT}`);
 });
