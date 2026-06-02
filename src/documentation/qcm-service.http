@@ -1,0 +1,81 @@
+### GET qcms
+GET http://localhost:3001/qcms
+
+
+### GET cat by id
+GET http://localhost:3001/qcms/1
+
+###Creer un qcm
+POST http://localhost:3001/qcms
+Content-Type: application/json
+
+{
+  "data": {
+    "name": "Culture Numérique"
+  }
+}
+
+
+###Récupère le résultat d'un QCM (score) |
+POST http://localhost:3001/qcms
+Content-Type: application/json
+
+{
+  "data": {
+    "name": "Culture Numérique"
+  }
+}
+
+###Creer un qcm
+POST http://localhost:3001/questions
+Content-Type: application/json
+Authorization: Bearer "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJzYWJyaW5hLWxvZ2luQHRlc3QuZnIiLCJpYXQiOjE3ODAzOTM0ODAsImV4cCI6MTc4MDQwMDY4MH0.h1no01eg7Fibg6b0OtLVMOd_zGVHmu_1lELgUUvc4DY"
+
+{
+  "data": {
+    "description": "Que signifie HTTP ?",
+    "qcmId": 1
+  }
+}
+
+###Soumettre une reponse
+GET  http://localhost:3001/qcms/1/result
+Content-Type: application/json
+
+{
+  "data": {
+    "propositionId": 1,
+    "isChecked": true
+  }
+}
+
+
+
+
+###Soumettre une reponse
+POST http://localhost:3001/qcms/1/response
+Content-Type: application/json
+Authorization: Bearer "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJzYWJyaW5hLWxvZ2luQHRlc3QuZnIiLCJpYXQiOjE3ODAzOTQzMDYsImV4cCI6MTc4MDQwMTUwNn0.zBSwbe7QSSDFNR5ks2ujd0SN-PdDdZ_N1ScuBK12Dww"
+
+{
+  "data": {
+    "propositionId": 1,
+    "isChecked": true
+  }
+}
+
+### Soumettre une réponse
+POST http://localhost:3001/qcms/1/response
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJzYWJyaW5hLWxvZ2luQHRlc3QuZnIiLCJpYXQiOjE3ODAzOTQzMDYsImV4cCI6MTc4MDQwMTUwNn0.zBSwbe7QSSDFNR5ks2ujd0SN-PdDdZ_N1ScuBK12Dww
+
+{
+  "data": {
+    "propositionId": 1,
+    "isChecked": true
+  }
+}
+
+
+### GET cat by id
+GET http://localhost:3001/qcms/1/question

@@ -1,0 +1,7 @@
+### GET questions
+GET http://localhost:3001/questions
+
+
+### GET cat by id
+GET http://localhost:3001/questions/1
+

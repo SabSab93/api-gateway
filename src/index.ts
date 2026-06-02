@@ -1,11 +1,12 @@
-import { PrismaClient } from "@prisma/client";
+import express from "express";
 import cors from "cors";
 import "dotenv/config";
-import express from "express";
-import { catRouter } from "./router/cats";
+
+import { qcmRouter } from "./router/qcms";
+import { PrismaClient } from "@prisma/client";
+import { propositionRouter } from "./router/propositions";
+import { questionRouter } from "./router/questions";
 import { userRouter } from "./router/users";
-import { authBearer } from "./middlewares/authBearer";
-import { roomRouter } from "./router/rooms";
 
 export const prisma = new PrismaClient();
 
@@ -16,18 +17,20 @@ app.use(express.json());
 
 const apiRouter = express.Router();
 
-apiRouter.get("/", (req, res) => {
-  res.json({ message: "MiaouHotel API fonctionne 🐱" });
+app.use("", apiRouter);
+
+apiRouter.get("/health", (req, res) => {
+  res.json({ status: "ok", service: "qcm-service" });
 });
 
-app.use("/api", apiRouter);
+apiRouter.use("/qcms", qcmRouter);
+apiRouter.use("/results", propositionRouter);
+apiRouter.use("/questions", questionRouter);
+apiRouter.use("/auth", userRouter);
 
 
-apiRouter.use("/cats", authBearer, catRouter)
-apiRouter.use("/auth", userRouter)
-apiRouter.use("/rooms", roomRouter)
+const PORT = process.env.PORT || 3001;
 
-const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`MiaouHotel API est en cours d'exécution sur le port ${PORT} 🐱`);
+  console.log(`QCM API est en cours d'exécution sur le port ${PORT}`);
 });

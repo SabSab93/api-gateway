@@ -1,5 +1,5 @@
 ### Register
-POST http://localhost:3000/api/auth/register
+POST http://localhost:3001/auth/register
 Content-Type: application/json
 
 {
@@ -11,7 +11,7 @@ Content-Type: application/json
 }
 
 ### Login
-POST http://localhost:3000/api/auth/login
+POST http://localhost:3001/auth/login
 Content-Type: application/json
 
 {
@@ -20,3 +20,4 @@ Content-Type: application/json
     "password": "kiki"
   }
 }
+

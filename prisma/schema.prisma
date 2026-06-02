@@ -8,37 +8,44 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
+  id        Int        @id @default(autoincrement())
   firstname String
-  email     String   @unique
+  email     String     @unique
   password  String
-  cats      Cat[]
-  createdAt DateTime @default(now())
+  responses Response[]
+  createdAt DateTime   @default(now())
 }
 
-model Cat {
-  id        Int      @id @default(autoincrement())
+model Qcm {
+  id        Int        @id @default(autoincrement())
   name      String
-  age       Int?
-  userId    Int
-  user      User     @relation(fields: [userId], references: [id])
-  createdAt DateTime @default(now())
-  stays     Stay[]
+  questions Question[]
+  createdAt DateTime   @default(now())
 }
 
-model Room {
-  id       Int    @id @default(autoincrement())
-  name     String
-  capacity Int
-  stays    Stay[]
+model Question {
+  id           Int           @id @default(autoincrement())
+  description  String
+  qcmId        Int
+  qcm          Qcm           @relation(fields: [qcmId], references: [id], onDelete: Cascade)
+  propositions Proposition[]
 }
 
-model Stay {
-  id        Int      @id @default(autoincrement())
-  startDate DateTime
-  endDate   DateTime
-  catId     Int
-  roomId    Int
-  cat       Cat      @relation(fields: [catId], references: [id])
-  room      Room     @relation(fields: [roomId], references: [id])
+model Proposition {
+  id          Int        @id @default(autoincrement())
+  description String
+  isValid     Boolean
+  questionId  Int
+  question    Question   @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  responses   Response[]
+}
+
+model Response {
+  propositionId Int
+  userId        Int
+  proposition   Proposition @relation(fields: [propositionId], references: [id], onDelete: Cascade)
+  user          User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  isChecked     Boolean
+
+  @@id([propositionId, userId])
 }
