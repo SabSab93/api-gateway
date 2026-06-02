@@ -29,6 +29,13 @@ cd miaouhotel-api
 
 ---
 
+git remote -v
+git remote remove origin
+git remote add origin URL_DU_NOUVEAU_REPO
+git branch -M main
+git push -u origin main
+
+
 ## 2. Installer les dépendances
 
 ```bash
