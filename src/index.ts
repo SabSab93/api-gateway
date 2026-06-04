@@ -7,21 +7,26 @@ import { requireAuth } from "./middlewares/requireAuth";
 const app = express();
 
 app.use(cors());
-
+console.log(
+  "proxy paths",
+  process.env.AUTH_SERVICE_URL,
+  process.env.QCM_SERVICE_URL,
+);
 const authServiceUrl = process.env.AUTH_SERVICE_URL || "http://localhost:3002";
 const qcmServiceUrl = process.env.QCM_SERVICE_URL || "http://localhost:3001";
+
+const authProxy = createProxyMiddleware({
+  target: authServiceUrl,
+  pathRewrite: {
+    "^/": "/auth/local/",
+  },
+  changeOrigin: true,
+});
 
 const qcmProxy = createProxyMiddleware({
   target: qcmServiceUrl,
   pathRewrite: {
-    "^/api/qcms": "/qcms",
-  },
-  changeOrigin: true,
-});
-const authProxy = createProxyMiddleware({
-  target: authServiceUrl,
-  pathRewrite: {
-    "^/api/auth/local": "/auth/local",
+    "^/": "/qcms/",
   },
   changeOrigin: true,
 });
@@ -29,18 +34,16 @@ const authProxy = createProxyMiddleware({
 const userProxy = createProxyMiddleware({
   target: authServiceUrl,
   pathRewrite: {
-    "^/api/users": "/users",
+    "^/": "/users",
   },
   changeOrigin: true,
 });
-
-
 
 app.get("/health", (req, res) => {
   res.json({ status: "ok", service: "api-gateway" });
 });
 
-app.use("/api/qcms",requireAuth, qcmProxy);
+app.use("/api/qcms", requireAuth, qcmProxy);
 app.use("/api/auth/local", authProxy);
 app.use("/api/users", userProxy);
 

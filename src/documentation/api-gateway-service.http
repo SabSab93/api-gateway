@@ -1,12 +1,13 @@
 ### Gateway health
 GET http://localhost:3000/health
 
-### QCMs via gateway
+### QCMs via gateway∏
 GET http://localhost:3000/api/qcms
 
 ### Via le gateway — Créer un QCM
 POST http://localhost:3000/api/qcms
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJsaWxpLWxvZ2luQHRlc3QuZnIiLCJpYXQiOjE3ODA1NjM3MzIsImV4cCI6MTc4MDU3MDkzMn0.d7qBz__t4MQtJUOCtWYUlgjvmcRH55sG4UnvQCPmaZ8
 
 {
   "data": {
@@ -66,9 +67,9 @@ Content-Type: application/json
 
 {
   "data": {
-    "firstname": "toto",
-    "email": "toto-login@test.fr",
-    "password": "koko"
+    "firstname": "lili",
+    "email": "lili-login@test.fr",
+    "password": "lolo"
   }
 }
 
@@ -78,12 +79,12 @@ Content-Type: application/json
 
 {
   "data": {
-    "email": "max-login@test.fr",
-    "password": "koko"
+    "email": "lili-login@test.fr",
+    "password": "lolo"
   }
 }
 
-### Login
+###
 GET http://localhost:3000/api/users/me
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJtYXgtbG9naW5AdGVzdC5mciIsImlhdCI6MTc4MDQwOTg5MCwiZXhwIjoxNzgwNDE3MDkwfQ.r44XRiSqUONhe7e5P0zTBDzet76l31vUVFrcvjl7p6I
