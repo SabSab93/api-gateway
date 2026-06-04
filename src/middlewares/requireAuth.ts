@@ -1,8 +1,18 @@
 import { Request, Response, NextFunction } from "express";
 
-export const requireAuth = async (req: Request, res: Response, next: NextFunction) => {
+export const requireAuth = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  // Routes publiques QCM : GET /api/qcms et GET /api/qcms/:id
+  if (req.method === "GET") {
+    return next();
+  }
+
   const authorization = req.headers.authorization;
-  const authServiceUrl = process.env.AUTH_SERVICE_URL || "http://localhost:3002";
+  const authServiceUrl =
+    process.env.AUTH_SERVICE_URL || "http://localhost:3002";
 
   if (!authorization) {
     return res.status(401).json({ message: "Unauthorized" });

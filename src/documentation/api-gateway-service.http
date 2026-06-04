@@ -1,7 +1,7 @@
 ### Gateway health
 GET http://localhost:3000/health
 
-### QCMs via gateway∏
+### QCMs via gateway
 GET http://localhost:3000/api/qcms
 
 ### Via le gateway — Créer un QCM
