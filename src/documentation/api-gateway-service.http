@@ -47,3 +47,52 @@ Content-Type: application/json
     ]
   }
 }
+
+###Soumettre une reponse
+POST http://localhost:3000/api/qcms/1/response
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJtYXgtbG9naW5AdGVzdC5mciIsImlhdCI6MTc4MDQwNzczMywiZXhwIjoxNzgwNDE0OTMzfQ.wnXaS5AjcDKCty63ybKAy6J0ATn4QtP77JOiHp33Q2k
+
+{
+  "data": {
+    "propositionId": 2,
+    "isChecked": true
+  }
+}
+
+### Register
+POST http://localhost:3000/api/auth/local/register
+Content-Type: application/json
+
+{
+  "data": {
+    "firstname": "toto",
+    "email": "toto-login@test.fr",
+    "password": "koko"
+  }
+}
+
+### Login
+POST http://localhost:3000/api/auth/local/
+Content-Type: application/json
+
+{
+  "data": {
+    "email": "max-login@test.fr",
+    "password": "koko"
+  }
+}
+
+### Login
+GET http://localhost:3000/api/users/me
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJtYXgtbG9naW5AdGVzdC5mciIsImlhdCI6MTc4MDQwOTg5MCwiZXhwIjoxNzgwNDE3MDkwfQ.r44XRiSqUONhe7e5P0zTBDzet76l31vUVFrcvjl7p6I
+
+
+
+
+###Soumettre une reponse
+GET  http://localhost:3000/api/qcms/1/result
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJtYXgtbG9naW5AdGVzdC5mciIsImlhdCI6MTc4MDQwOTg5MCwiZXhwIjoxNzgwNDE3MDkwfQ.r44XRiSqUONhe7e5P0zTBDzet76l31vUVFrcvjl7p6I
+
