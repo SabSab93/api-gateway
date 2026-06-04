@@ -30,13 +30,8 @@ app.get("/health", (req, res) => {
   res.json({ status: "ok", service: "api-gateway" });
 });
 
-// QCM
 app.use("/api/qcms", requireAuth, qcmProxy);
-
-// Auth
 app.use("/api/auth/local", authProxy);
-
-// Users
 app.use("/api/users", userProxy);
 
 const PORT = process.env.PORT || 3000;
