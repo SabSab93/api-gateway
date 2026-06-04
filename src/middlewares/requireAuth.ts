@@ -2,13 +2,14 @@ import { Request, Response, NextFunction } from "express";
 
 export const requireAuth = async (req: Request, res: Response, next: NextFunction) => {
   const authorization = req.headers.authorization;
+  const authServiceUrl = process.env.AUTH_SERVICE_URL || "http://localhost:3002";
 
   if (!authorization) {
     return res.status(401).json({ message: "Unauthorized" });
   }
 
   try {
-    const response = await fetch("http://localhost:3002/users/me", {
+    const response = await fetch(`${authServiceUrl}/users/me`, {
       method: "GET",
       headers: {
         Authorization: authorization,

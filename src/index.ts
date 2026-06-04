@@ -8,17 +8,29 @@ const app = express();
 
 app.use(cors());
 
+const authServiceUrl = process.env.AUTH_SERVICE_URL || "http://localhost:3002";
+const qcmServiceUrl = process.env.QCM_SERVICE_URL || "http://localhost:3001";
+
 const qcmProxy = createProxyMiddleware({
-  target: "http://localhost:3001/qcms",
+  target: qcmServiceUrl,
+  pathRewrite: {
+    "^/api/qcms": "/qcms",
+  },
   changeOrigin: true,
 });
 const authProxy = createProxyMiddleware({
-  target: "http://localhost:3002/auth/local",
+  target: authServiceUrl,
+  pathRewrite: {
+    "^/api/auth/local": "/auth/local",
+  },
   changeOrigin: true,
 });
 
 const userProxy = createProxyMiddleware({
-  target: "http://localhost:3002/users",
+  target: authServiceUrl,
+  pathRewrite: {
+    "^/api/users": "/users",
+  },
   changeOrigin: true,
 });
 
